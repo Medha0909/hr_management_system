@@ -31,21 +31,21 @@ const GoalComponent = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       const response = await axios.get(
-        "http://localhost:8080/performance/goals"
+        "https://hr-management-system-f8uk.onrender.com/performance/goals"
       );
       setGoals(response.data);
     };
     fetchGoals();
     const fetchReviews = async () => {
       const response = await axios.get(
-        "http://localhost:8080/performance/reviews"
+        "https://hr-management-system-f8uk.onrender.com/performance/reviews"
       );
       setReview(response.data);
     };
     fetchReviews();
     const fetchdevelopmentPlan = async () => {
       const response = await axios.get(
-        "http://localhost:8080/performance/development-plans"
+        "https://hr-management-system-f8uk.onrender.com/performance/development-plans"
       );
       setDevelopmentPlan(response.data);
     };
@@ -53,16 +53,16 @@ const GoalComponent = () => {
   }, []);
 
   const addGoal = async () => {
-    await axios.post("http://localhost:8080/performance/goals", newGoal);
+    await axios.post("https://hr-management-system-f8uk.onrender.com/performance/goals", newGoal);
     setNewGoal({ description: "", status: "", targetDate: "" });
   };
   const addReview = async () => {
-    await axios.post("http://localhost:8080/performance/reviews", newReview);
+    await axios.post("https://hr-management-system-f8uk.onrender.com/performance/reviews", newReview);
     setNewReview({ description: "", status: "", targetDate: "" });
   };
   const adddevelopmentPlan = async () => {
     await axios.post(
-      "http://localhost:8080/performance/development-plans",
+      "https://hr-management-system-f8uk.onrender.com/performance/development-plans",
       newDevelopmentPlan
     );
     setNewDevelopmentPlan({ description: "", status: "", targetDate: "" });
