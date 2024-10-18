@@ -44,6 +44,9 @@ router.post("/createemployee", async (req, res) => {
           id: user.id,
         },
       };
+       success = true;
+      res.json({ success});
+
     }
   } catch (error) {
     console.error(error.message);
