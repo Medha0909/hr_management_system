@@ -49,7 +49,7 @@ export default function Form() {
     } = credentials;
 
     const response = await fetch(
-      "http://localhost:8080/details/createemployee",
+      "https://hr-management-system-f8uk.onrender.com/details/createemployee",
       {
         method: "POST",
         headers: {
