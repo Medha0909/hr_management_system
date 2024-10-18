@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Navbara from "./navbar1";
+import Navbar from "./navbar";
 import { FaFacebook } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -101,7 +101,7 @@ export default function Form() {
   return (
     <>
       <div className="gfx">
-        <Navbara />
+        <Navbar />
 
         <form className="max-w-md mt-[50px] mx-auto" onSubmit={handleSubmit}>
           <div className="tabs grid md:grid-cols-2 md:gap-6">
