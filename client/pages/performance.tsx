@@ -6,7 +6,7 @@ import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaSquareRss } from "react-icons/fa6";
-import Navbara from "./navbar1";
+import Navbar from "./navbar";
 
 const GoalComponent = () => {
   const [goals, setGoals] = useState<any | null[]>([null]);
@@ -70,7 +70,7 @@ const GoalComponent = () => {
 
   return (
     <>
-      <Navbara />
+      <Navbar />
 
       <div className="head">
         <h3>Goals</h3>
