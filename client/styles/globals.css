@@ -21,15 +21,6 @@ body{
 .navbar{
   background-color: var(--nav_background);
 }
-.head{
-  margin-top: 100px;
-  margin-left: 100px;
-  margin-bottom: 100px;
-}
-.fetch{
-  padding-top: 50px;
-  color:maroon;
-}
 #steel{
   color:var(--meowish);
 }
@@ -323,7 +314,6 @@ body {
   padding: 10px;
   border: none;
   border-radius: 3px 0 0 3px;
-  color:#502D3C;
 }
 
 .newsletter button {
@@ -383,13 +373,13 @@ body {
 .lab{
   margin-top: -6px;
   font-size:larger;
-  color:#4F2C3B;
+  color:#C2A5B3;
   width: 230px;
   
   
 }
 .labs{
-  color:#4F2C3B; 
+  color:#C2A5B3; 
 }
 .tabs{
   margin-top: 40px;
@@ -400,14 +390,10 @@ body {
   color:#502D3C;
 }
 .subs{
-  background-color:#fbae0a;
-  margin-bottom: 80px;
+  background-color:#f3b735;
 }
 .subs:hover{
   background-color: #FDB71C;
-}
-.per{
-  margin-top: 15px;
 }
 .formes{
   margin-bottom: 90px;
@@ -420,7 +406,7 @@ body {
       padding: 20px;
       width: 700px;
       height: 380px;
-      background-color:#4F2C3B;
+      background-color:#f5ebe3;
       font-family: sans-serif;
       margin: 0 auto;
       margin-top: 75px;
@@ -448,36 +434,64 @@ body {
   font-weight:bold;
   margin-left: 200px;
   margin-top: 50px;
-  color: #C2A5B3;
 }
 .title{
   font-size:18px;
   margin: 5px 0;
   margin-left: 200px;
-  color: #C2A5B3;
 }
 .id{
   font-size:15px;
   margin: 5px 0;
   margin-left: 200px;
-  color: #C2A5B3;
 }
 .expiry{
   font-size:15px;
   margin: 5px 0;
   margin-left: 200px;
-  color: #C2A5B3;
 }
 .contactContainer{
   margin-top:10px;
   font-size: 15px;
   line-height: 1.6;
   margin-left: 200px;
-  color: #C2A5B3;
 }
+.geo{
+  font-size: xx-large;
+  color:#C2A5B3;
+  text-align: center;
+  margin-bottom: 45px;
+  padding-top: 60px;
 
-
-
+}
+.current{
+  font-size: large;
+  color:#C2A5B3;
+  text-align: center;
+  margin-bottom: 38px;
+}
+.sta{
+  font-size:medium;
+  color:#f3b735;
+  text-align: center;
+width:400px;
+margin-left:100px ;
+}
+.Geofence{
+  height: 400px;
+  margin-bottom: 100px;
+  
+  
+}
+.Geofence1{
+  margin-bottom: 200px;
+  margin-top: 100px;
+  margin-left: 500px;
+  background-color:#502D3C;
+  width: 586px;
+  height: 449px;
+ 
+}
 
 
 
@@ -557,6 +571,17 @@ body {
       padding-top: 100px;
 
     }
+    .Geofence1{
+      margin-left: 20px;
+      width: 376px;
+      height: 349px;
+      margin-bottom: 100px;
+      margin-top: 100px;
+    
+    }
+    .sta{
+      margin-left: -20px;
+    }
     .cat{
       display:none;
     }
@@ -575,10 +600,6 @@ body {
       margin-left: 85px;
       margin-bottom: 40px;
       
-    }
-    .tabs{
-      margin-top: 40px;
-  width: 360px;
     }
   
     .icon {
@@ -665,3 +686,27 @@ body {
   }
   
   }
+.labs{
+  color:#4F2C3B; 
+}
+.tabs{
+  margin-top: 40px;
+  width: 480px;
+}
+.block{
+  font-size: medium;
+  color:#502D3C;
+}
+.subs{
+  background-color:#fbae0a;
+  margin-bottom: 80px;
+}
+.subs:hover{
+  background-color: #FDB71C;
+}
+.per{
+  margin-top: 15px;
+}
+.formes{
+  margin-bottom: 90px;
+}
