@@ -561,7 +561,15 @@ margin-left:100px ;
      
 }
 }
-
+.head{
+  margin-top: 100px;
+  margin-left: 100px;
+  margin-bottom: 100px;
+}
+.fetch{
+  padding-top: 50px;
+  color:maroon;
+}
 
   @media (max-width: 768px) {
     #dark{
