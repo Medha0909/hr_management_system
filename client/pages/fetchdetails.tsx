@@ -5,7 +5,6 @@ import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaSquareRss } from "react-icons/fa6";
-import Navbar from "./navbar";
 
 export default function Pricing() {
   const [getdata, setGetdata] = useState<any | null[]>([null]);
