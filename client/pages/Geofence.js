@@ -73,7 +73,7 @@ const Geofence = () => {
 
   return (
     <div className='Geofence'>
-        <Navbara />
+        <Navbar />
         <div className='Geofence1'>
 
       <h1 className='geo'>Geofencing Attendance</h1>
