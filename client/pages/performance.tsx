@@ -1,30 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaFacebook, FaSquareRss } from "react-icons/fa6";
-import { FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa6";
+import { FaTwitter } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
+import { FaSquareRss } from "react-icons/fa6";
 import Navbar from "./navbar";
 
 const GoalComponent = () => {
-  const [goals, setGoals] = useState<any[]>([]);
-  const [review, setReview] = useState<any[]>([]);
-  const [developmentPlan, setDevelopmentPlan] = useState<any[]>([]);
-  const [newGoal, setNewGoal] = useState({ description: "", status: "", targetDate: "" });
-  const [newReview, setNewReview] = useState({ description: "", status: "", targetDate: "" });
-  const [newDevelopmentPlan, setNewDevelopmentPlan] = useState({ description: "", status: "", targetDate: "" });
+  const [goals, setGoals] = useState<any | null[]>([null]);
+  const [review, setReview] = useState<any | null[]>([null]);
+  const [developmentPlan, setDevelopmentPlan] = useState<any | null[]>([null]);
+  const [newGoal, setNewGoal] = useState({
+    description: "",
+    status: "",
+    targetDate: "",
+  });
+  const [newReview, setNewReview] = useState({
+    description: "",
+    status: "",
+    targetDate: "",
+  });
+  const [newDevelopmentPlan, setNewDevelopmentPlan] = useState({
+    description: "",
+    status: "",
+    targetDate: "",
+  });
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const [goalRes, reviewRes, planRes] = await Promise.all([
-        axios.get("https://hr-management-system-f8uk.onrender.com/performance/goals"),
-        axios.get("https://hr-management-system-f8uk.onrender.com/performance/reviews"),
-        axios.get("https://hr-management-system-f8uk.onrender.com/performance/development-plans"),
-      ]);
-      setGoals(goalRes.data);
-      setReview(reviewRes.data);
-      setDevelopmentPlan(planRes.data);
+    const fetchGoals = async () => {
+      const response = await axios.get(
+        "https://hr-management-system-f8uk.onrender.com/performance/goals"
+      );
+      setGoals(response.data);
     };
-    fetchAll();
+    fetchGoals();
+    const fetchReviews = async () => {
+      const response = await axios.get(
+        "https://hr-management-system-f8uk.onrender.com/performance/reviews"
+      );
+      setReview(response.data);
+    };
+    fetchReviews();
+    const fetchdevelopmentPlan = async () => {
+      const response = await axios.get(
+        "https://hr-management-system-f8uk.onrender.com/performance/development-plans"
+      );
+      setDevelopmentPlan(response.data);
+    };
+    fetchdevelopmentPlan();
   }, []);
 
   const addGoal = async () => {
@@ -35,126 +59,227 @@ const GoalComponent = () => {
     await axios.post("https://hr-management-system-f8uk.onrender.com/performance/reviews", newReview);
     setNewReview({ description: "", status: "", targetDate: "" });
   };
-  const addPlan = async () => {
-    await axios.post("https://hr-management-system-f8uk.onrender.com/performance/development-plans", newDevelopmentPlan);
+  const adddevelopmentPlan = async () => {
+    await axios.post(
+      "https://hr-management-system-f8uk.onrender.com/performance/development-plans",
+      newDevelopmentPlan
+    );
     setNewDevelopmentPlan({ description: "", status: "", targetDate: "" });
   };
-
-  const Section = ({ title, newItem, setNewItem, addItem, list }: any) => (
-    <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-3xl mx-auto mt-10">
-      <h2 className="text-2xl font-semibold mb-4 text-indigo-700">{title}</h2>
-      <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
-        <input
-          type="text"
-          className="border p-2 rounded-md"
-          placeholder="Description"
-          value={newItem.description}
-          onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-        />
-        <input
-          type="text"
-          className="border p-2 rounded-md"
-          placeholder="Status/Rating"
-          value={newItem.status}
-          onChange={(e) => setNewItem({ ...newItem, status: e.target.value })}
-        />
-        <input
-          type="date"
-          className="border p-2 rounded-md"
-          value={newItem.targetDate}
-          onChange={(e) => setNewItem({ ...newItem, targetDate: e.target.value })}
-        />
-      </div>
-      <div className="flex justify-end mt-4">
-        <button
-          onClick={addItem}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
-        >
-          Add {title}
-        </button>
-      </div>
-      <ul className="mt-6 space-y-2">
-        {list?.map((item: any) => (
-          <li key={item._id} className="bg-gray-100 p-3 rounded-md shadow-sm">
-            <span className="font-medium">{item.description}</span> – <span>{item.status}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 
   return (
     <>
       <Navbar />
-      <div className="bg-gray-50 min-h-screen py-10 px-4">
-        <Section
-          title="Goals"
-          newItem={newGoal}
-          setNewItem={setNewGoal}
-          addItem={addGoal}
-          list={goals}
-        />
-        <Section
-          title="Reviews"
-          newItem={newReview}
-          setNewItem={setNewReview}
-          addItem={addReview}
-          list={review}
-        />
-        <Section
-          title="Development Plans"
-          newItem={newDevelopmentPlan}
-          setNewItem={setNewDevelopmentPlan}
-          addItem={addPlan}
-          list={developmentPlan}
-        />
-      </div>
 
-      <footer className="bg-indigo-900 text-white py-10">
-        <div className="container mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-8 px-4">
-          <div>
-            <h3 className="font-bold mb-3">COMPANY</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Privacy</a></li>
-              <li><a href="#">Customers</a></li>
-            </ul>
+      <div className="head">
+        <h3>Goals</h3>
+        <input
+          type="text"
+          placeholder="Goal Description"
+          value={newGoal.description}
+          onChange={(e) =>
+            setNewGoal({ ...newGoal, description: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          placeholder="Status"
+          value={newGoal.status}
+          onChange={(e) => setNewGoal({ ...newGoal, status: e.target.value })}
+        />
+        <input
+          type="date"
+          value={newGoal.targetDate}
+          onChange={(e) =>
+            setNewGoal({ ...newGoal, targetDate: e.target.value })
+          }
+        />
+        <button onClick={addGoal} className="flex w-[100px] mt-[30px] justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sbtn" >Add Goal</button>
+        <ul className="fetch">
+          {goals == "" || goals == null
+            ? ""
+            : goals.map((goal: any) => (
+                <li key={goal._id}>
+                  {goal.description} - {goal.status}
+                </li>
+              ))}
+        </ul>
+      </div>
+      <div className="head">
+        <h3>Reviews</h3>
+        <input
+          type="text"
+          placeholder="Description"
+          value={newReview.description}
+          onChange={(e) =>
+            setNewReview({ ...newReview, description: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          placeholder="Rate out of 10"
+          value={newReview.status}
+          onChange={(e) =>
+            setNewReview({ ...newReview, status: e.target.value })
+          }
+        />
+        <input
+          type="date"
+          value={newReview.targetDate}
+          onChange={(e) =>
+            setNewReview({ ...newReview, targetDate: e.target.value })
+          }
+        />
+        <button onClick={addReview} className="flex w-[200px] mt-[30px]  justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sbtn">Add Review</button>
+        <ul className="fetch">
+          {review == "" || review == null
+            ? ""
+            : review.map((review: any) => (
+                <li key={review._id}>
+                  {review.description} - {review.status}
+                </li>
+              ))}
+        </ul>
+      </div>
+      <div className="head">
+        <h3>Development Plan</h3>
+        <input
+          type="text"
+          placeholder="Development Plan"
+          value={newDevelopmentPlan.description}
+          onChange={(e) =>
+            setNewDevelopmentPlan({
+              ...newDevelopmentPlan,
+              description: e.target.value,
+            })
+          }
+        />
+        <input
+          type="text"
+          placeholder="Rate out of 10"
+          value={newDevelopmentPlan.status}
+          onChange={(e) =>
+            setNewDevelopmentPlan({
+              ...newDevelopmentPlan,
+              status: e.target.value,
+            })
+          }
+        />
+        <input
+          type="date"
+          value={newDevelopmentPlan.targetDate}
+          onChange={(e) =>
+            setNewDevelopmentPlan({
+              ...newDevelopmentPlan,
+              targetDate: e.target.value,
+            })
+          }
+        />
+        <button onClick={adddevelopmentPlan} className="flex w-[100px] mt-[30px] justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sbtn">Add Plan</button>
+        <ul className="fetch">
+          {developmentPlan == "" || developmentPlan == null
+            ? ""
+            : developmentPlan.map((developmentPlan: any) => (
+                <li key={developmentPlan._id}>
+                  {developmentPlan.description} - {developmentPlan.status}
+                </li>
+              ))}
+        </ul>
+      </div>
+      <section id="foot">
+        <footer className="footer">
+          <div className="footer-container">
+            <div className="footer-column">
+              <h3>COMPANY</h3>
+              <ul>
+                <li>
+                  <a href="#">Careers</a>
+                </li>
+                <li>
+                  <a href="#">About Us</a>
+                </li>
+                <li>
+                  <a href="#">FAQ</a>
+                </li>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Privacy</a>
+                </li>
+                <li>
+                  <a href="#">Customers</a>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h3>CATEGORIES</h3>
+              <ul>
+                <li>
+                  <a href="#">Employee Details</a>
+                </li>
+                <li>
+                  <a href="#">Register Employee</a>
+                </li>
+                <li>
+                  <a href="#">Payroll</a>
+                </li>
+                <li>
+                  <a href="#">Time and attendance</a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="footer-column newsletter">
+              <h3>GET IN TOUCH</h3>
+              <form className="get">
+                <input type="email" placeholder="Enter your email here..." />
+                <button type="submit">SEND MESSAGE</button>
+              </form>
+            </div>
           </div>
-          <div>
-            <h3 className="font-bold mb-3">CATEGORIES</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#">Employee Details</a></li>
-              <li><a href="#">Register Employee</a></li>
-              <li><a href="#">Payroll</a></li>
-              <li><a href="#">Time and Attendance</a></li>
-            </ul>
+          <div className="footer-bottom">
+            <p>
+              Copyright © 2022 <a href="#">Sage HR</a> | All Rights Reserved
+            </p>
+            <div className="social-icons">
+              <div className="iii">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a className="a1" href="#">
+                          <FaFacebook />
+                        </a>
+                      </td>
+                      <td>
+                        <a href="https://x.com/Jaspree99070719">
+                          <FaTwitter />
+                        </a>
+                      </td>
+                      <td>
+                        <a href="https://github.com/Jaspreet-2209">
+                          <FaLinkedin />
+                        </a>
+                      </td>
+                      <td>
+                        <a href="#">
+                          <PiInstagramLogoFill />
+                        </a>
+                      </td>
+                      <td>
+                        <a href="#">
+                          <FaSquareRss />
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 className="font-bold mb-3">GET IN TOUCH</h3>
-            <form className="flex flex-col gap-2">
-              <input type="email" placeholder="Enter your email here..." className="p-2 rounded-md text-black" />
-              <button type="submit" className="bg-white text-indigo-900 px-4 py-2 rounded-md hover:bg-gray-200">
-                SEND MESSAGE
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="mt-10 text-center text-sm border-t border-indigo-800 pt-4">
-          <p>
-            © 2022 <a href="#" className="underline">Sage HR</a> | All Rights Reserved
-          </p>
-          <div className="flex justify-center mt-4 space-x-4 text-xl">
-            <a href="#"><FaFacebook /></a>
-            <a href="https://x.com/Jaspree99070719"><FaTwitter /></a>
-            <a href="https://github.com/Jaspreet-2209"><FaLinkedin /></a>
-            <a href="#"><PiInstagramLogoFill /></a>
-            <a href="#"><FaSquareRss /></a>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      </section>
     </>
   );
 };
